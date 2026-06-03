@@ -269,11 +269,12 @@ p.body{color:var(--cream-dim);font-size:17px;line-height:1.7;font-weight:300}
     align-items:center;
   }
   .hero-eyebrow{
+    font-size:11px;
     margin-bottom:18px;
   }
   .hero[data-hero="b"] .hero-sub{
     text-align:center;
-    font-size:28px;
+    font-size:21px;
     max-width:calc(100% - 120px);
     margin:0 auto 26px;
   }
