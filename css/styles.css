@@ -261,15 +261,21 @@ p.body{color:var(--cream-dim);font-size:17px;line-height:1.7;font-weight:300}
   .hero[data-hero="b"] .hero-copy{
     width:100%;
     max-width:none;
-    padding:14px 24px 0;
+    padding:0 24px 0;
+    margin-top:-46px;
     text-align:center;
     display:flex;
     flex-direction:column;
     align-items:center;
   }
+  .hero-eyebrow{
+    margin-bottom:18px;
+  }
   .hero[data-hero="b"] .hero-sub{
     text-align:center;
-    margin:14px auto 26px;
+    font-size:28px;
+    max-width:calc(100% - 120px);
+    margin:0 auto 26px;
   }
   .hero-meta{
     justify-content:center;
@@ -657,10 +663,11 @@ p.body{color:var(--cream-dim);font-size:17px;line-height:1.7;font-weight:300}
     padding:28px 24px;
   }
   .price-card .pv{
-    gap:4px;
+    gap:5px;
+    line-height:1.05;
   }
   .price-card .pv .num{
-    font-size:clamp(52px,16vw,72px);
+    font-size:clamp(48px,14.5vw,68px);
   }
   .price-card .pv .cur,
   .price-card .pv .cents{
