@@ -148,10 +148,14 @@ async function handler(req, res) {
     const validation = validateLead(payload);
     if (!validation.ok) return json(res, 400, validation);
 
-    const [clickupTask, metaResult] = await Promise.all([
-      createClickUpTask(payload),
-      sendMetaLead(payload, req),
-    ]);
+    const clickupTask = await createClickUpTask(payload);
+    let metaResult = null;
+
+    try {
+      metaResult = await sendMetaLead(payload, req);
+    } catch (metaError) {
+      console.error("Meta CAPI falhou depois do cadastro no ClickUp:", metaError);
+    }
 
     return json(res, 200, {
       ok: true,
