@@ -19,7 +19,7 @@
   </a>
   <div class="bar-right">
     <div class="deadline">Inscrições até <b>25/06</b></div>
-    <a class="btn btn-cta js-wa" href="#">Garantir vaga <span class="ico">›</span></a>
+    <a class="btn btn-cta js-lead-trigger" href="#cadastro">Garantir vaga <span class="ico">›</span></a>
   </div>
 </header>
 
@@ -36,7 +36,7 @@
         <div class="m"><div class="mt">Formato</div><div class="mv">Presencial · <em>1 dia</em></div></div>
       </div>
       <div class="hero-cta-row">
-        <a class="btn btn-cta" href="#para-quem">Quero garantir minha vaga <span class="ico">›</span></a>
+        <a class="btn btn-cta js-lead-trigger" href="#cadastro">Quero garantir minha vaga <span class="ico">›</span></a>
         <a class="btn btn-ghost" href="#imersao">Conhecer o método</a>
       </div>
       <div class="hero-note">Vagas limitadas · Grupo seleto de profissionais · Inscrições até 25/06</div>
@@ -281,7 +281,7 @@
           <span class="vl">Vagas limitadas</span>
           <p class="vp">Grupo seleto de profissionais para garantir prática acompanhada e correções de perto. Inscrições até <b style="color:var(--gold-lt)">25/06</b>.</p>
         </div>
-        <a class="btn btn-cta btn-block js-wa-investment" href="#" style="margin-top:26px">Garantir minha vaga <span class="ico">›</span></a>
+        <a class="btn btn-cta btn-block js-lead-trigger" href="#cadastro" style="margin-top:26px">Garantir minha vaga <span class="ico">›</span></a>
       </div>
     </div>
   </div>
@@ -312,7 +312,7 @@
       <div class="eyebrow" style="justify-content:center;margin-bottom:24px"><span class="num">11</span><span class="ln"></span>Última chamada</div>
       <h2 class="display">Chegou <span class="it gold">sua hora</span>.</h2>
       <p class="lead">Talvez essa seja a oportunidade que faltava para você mudar completamente sua trajetória dentro da estética. O mercado cresce todos os dias — mas só profissionais <em>preparadas</em> ocupam os maiores espaços. Agora a decisão está nas suas mãos.</p>
-      <a class="btn btn-cta js-wa" href="#">Quero garantir minha vaga <span class="ico">›</span></a>
+      <a class="btn btn-cta js-lead-trigger" href="#cadastro">Quero garantir minha vaga <span class="ico">›</span></a>
       <div class="deadline-row">
         <div class="d"><div class="dv">04 Jul</div><div class="dl">Imersão presencial</div></div>
         <div class="d"><div class="dv">São Luís · MA</div><div class="dl">Local</div></div>
@@ -338,8 +338,64 @@
 </footer>
 
 <!-- ============ FLOATING MOBILE CTA ============ -->
-<div class="float-cta"><a class="btn btn-cta js-wa" href="#">Garantir minha vaga · R$ 3.500 <span class="ico">›</span></a></div>
+<div class="float-cta"><a class="btn btn-cta js-lead-trigger" href="#cadastro">Garantir minha vaga · R$ 3.500 <span class="ico">›</span></a></div>
 
-<script src="js/main.js?v=20260603-2"></script>
+<!-- ============ LEAD MODAL ============ -->
+<div class="lead-modal" id="leadModal" aria-hidden="true">
+  <div class="lead-modal__backdrop" data-close-lead></div>
+  <div class="lead-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
+    <button class="lead-modal__close" type="button" aria-label="Fechar formulario" data-close-lead>&times;</button>
+    <div class="lead-modal__eyebrow">Inscri&ccedil;&atilde;o</div>
+    <h3 id="leadModalTitle">Garanta sua vaga na Imers&atilde;o Bum Sculp 3D</h3>
+    <p>Preencha seus dados para nossa equipe confirmar sua inscri&ccedil;&atilde;o pelo WhatsApp.</p>
+    <form class="lead-form" id="leadForm">
+      <label>
+        <span>Nome completo</span>
+        <input name="nome" type="text" autocomplete="name" required>
+      </label>
+      <label>
+        <span>WhatsApp com DDD</span>
+        <input name="whatsapp" type="tel" inputmode="tel" autocomplete="tel" placeholder="(98) 99999-9999" required>
+      </label>
+      <fieldset class="lead-form__block">
+        <legend>Forma&ccedil;&atilde;o</legend>
+        <div class="option-group" data-option-group="formacao">
+          <label class="option-chip"><input name="formacao" type="radio" value="Biomédica ou Dentista" required><span>Biom&eacute;dica ou Dentista</span></label>
+          <label class="option-chip"><input name="formacao" type="radio" value="Enfermeira"><span>Enfermeira</span></label>
+          <label class="option-chip"><input name="formacao" type="radio" value="Farmacêutica"><span>Farmac&ecirc;utica</span></label>
+          <label class="option-chip"><input name="formacao" type="radio" value="Esteticista"><span>Esteticista</span></label>
+          <label class="option-chip"><input name="formacao" type="radio" value="Outro" data-other-toggle="formacaoOutro"><span>Outro</span></label>
+          <input class="option-other" name="formacaoOutro" type="text" placeholder="Digite sua forma&ccedil;&atilde;o" hidden>
+        </div>
+      </fieldset>
+      <fieldset class="lead-form__block">
+        <legend>Objetivo com a imers&atilde;o</legend>
+        <div class="option-group" data-option-group="objetivo">
+          <label class="option-chip"><input name="objetivo" type="radio" value="Dominar a técnica do zero" required><span>Dominar a t&eacute;cnica do zero</span></label>
+          <label class="option-chip"><input name="objetivo" type="radio" value="Aumentar meu faturamento"><span>Aumentar meu faturamento</span></label>
+          <label class="option-chip"><input name="objetivo" type="radio" value="Oferecer um serviço premium"><span>Oferecer um servi&ccedil;o premium</span></label>
+          <label class="option-chip"><input name="objetivo" type="radio" value="Me posicionar como referência"><span>Me posicionar como refer&ecirc;ncia</span></label>
+          <label class="option-chip"><input name="objetivo" type="radio" value="Outro" data-other-toggle="objetivoOutro"><span>Outro</span></label>
+          <input class="option-other" name="objetivoOutro" type="text" placeholder="Digite seu objetivo" hidden>
+        </div>
+      </fieldset>
+      <fieldset class="lead-form__block">
+        <legend>Faturamento m&eacute;dio atual</legend>
+        <div class="option-group" data-option-group="faturamentoMedio">
+          <label class="option-chip"><input name="faturamentoMedio" type="radio" value="Até R$ 3 mil por mês" required><span>At&eacute; R$ 3 mil por m&ecirc;s</span></label>
+          <label class="option-chip"><input name="faturamentoMedio" type="radio" value="De R$ 3 mil a R$ 8 mil por mês"><span>De R$ 3 mil a R$ 8 mil por m&ecirc;s</span></label>
+          <label class="option-chip"><input name="faturamentoMedio" type="radio" value="De R$ 8 mil a R$ 15 mil por mês"><span>De R$ 8 mil a R$ 15 mil por m&ecirc;s</span></label>
+          <label class="option-chip"><input name="faturamentoMedio" type="radio" value="Acima de R$ 15 mil por mês"><span>Acima de R$ 15 mil por m&ecirc;s</span></label>
+          <label class="option-chip"><input name="faturamentoMedio" type="radio" value="Outro" data-other-toggle="faturamentoMedioOutro"><span>Outro</span></label>
+          <input class="option-other" name="faturamentoMedioOutro" type="text" placeholder="Digite seu faturamento m&eacute;dio" hidden>
+        </div>
+      </fieldset>
+      <button class="btn btn-cta btn-block" type="submit">Enviar cadastro <span class="ico">›</span></button>
+      <div class="lead-form__status" id="leadFormStatus" role="status" aria-live="polite"></div>
+    </form>
+  </div>
+</div>
+
+<script src="js/main.js?v=20260603-4"></script>
 </body>
 </html>

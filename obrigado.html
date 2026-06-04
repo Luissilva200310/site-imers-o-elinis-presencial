@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cadastro realizado · Imersao Bum Sculp 3D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css?v=20260603-10">
+</head>
+<body>
+<section class="final" style="min-height:100vh;display:flex;align-items:center">
+  <div class="wrap">
+    <div class="rv in" style="text-align:center">
+      <div class="eyebrow" style="justify-content:center;margin-bottom:24px"><span class="num">OK</span><span class="ln"></span>Cadastro recebido</div>
+      <h1 class="display">Seu cadastro <span class="it gold">esta feito</span>.</h1>
+      <p class="lead">Nossa equipe recebeu seus dados. Agora chame no WhatsApp para acelerar a confirmacao da sua vaga na Imersao Bum Sculp 3D.</p>
+      <a class="btn btn-cta" id="confirmationWa" href="#">Chamar no WhatsApp <span class="ico">›</span></a>
+    </div>
+  </div>
+</section>
+
+<script src="js/main.js?v=20260603-4"></script>
+<script>
+  const confirmationNumber = "559891529871";
+  const confirmationMsg = encodeURIComponent("Ola, fiz meu cadastro pelo site da Imersao Bum Sculp 3D e quero falar com a equipe.");
+  const confirmationLink = document.getElementById("confirmationWa");
+  if (confirmationLink) confirmationLink.href = `https://wa.me/${confirmationNumber}?text=${confirmationMsg}`;
+
+  const params = new URLSearchParams(window.location.search);
+  const eventId = params.get("event_id") || `complete-${Date.now()}`;
+  let attempts = 0;
+  const trackCompleteRegistration = setInterval(() => {
+    attempts += 1;
+    if (window.fbq) {
+      window.fbq("track", "CompleteRegistration", { content_name: "Imersao Bum Sculp 3D" }, { eventID: eventId });
+      clearInterval(trackCompleteRegistration);
+    }
+    if (attempts > 20) clearInterval(trackCompleteRegistration);
+  }, 250);
+</script>
+</body>
+</html>
