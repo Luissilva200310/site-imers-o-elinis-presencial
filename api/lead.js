@@ -164,6 +164,8 @@ async function handler(req, res) {
       metaSent: Boolean(metaResult),
     });
   } catch (error) {
+    console.error("Lead registration failed:", error);
+
     return json(res, 500, {
       ok: false,
       error: "Nao foi possivel registrar seu cadastro agora.",

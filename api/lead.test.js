@@ -143,3 +143,49 @@ test("handler registers lead when Meta CAPI fails after ClickUp succeeds", async
     metaSent: false,
   });
 });
+
+test("handler logs registration failures before returning a generic error", async () => {
+  const originalEnv = { ...process.env };
+  const originalFetch = global.fetch;
+  const originalConsoleError = console.error;
+  const errors = [];
+
+  delete process.env.CLICKUP_TOKEN;
+  process.env.NODE_ENV = "production";
+  global.fetch = async () => {
+    throw new Error("fetch should not run without ClickUp token");
+  };
+  console.error = (...args) => errors.push(args);
+
+  const req = {
+    method: "POST",
+    body: {
+      nome: "Maria Silva",
+      whatsapp: "(98) 91529-871",
+      formacao: "Biomedica",
+      objetivo: "Aprender a tecnica",
+      faturamentoMedio: "R$ 8.000",
+      pageUrl: "https://example.com/",
+    },
+    headers: { "user-agent": "Unit Test" },
+    socket: { remoteAddress: "203.0.113.1" },
+  };
+  const res = createJsonResponse();
+
+  try {
+    await handler(req, res);
+  } finally {
+    process.env = originalEnv;
+    global.fetch = originalFetch;
+    console.error = originalConsoleError;
+  }
+
+  assert.equal(res.statusCode, 500);
+  assert.deepEqual(JSON.parse(res.body), {
+    ok: false,
+    error: "Nao foi possivel registrar seu cadastro agora.",
+  });
+  assert.equal(errors.length, 1);
+  assert.match(String(errors[0][0]), /Lead registration failed/);
+  assert.match(errors[0].map(String).join(" "), /CLICKUP_TOKEN nao configurado/);
+});
