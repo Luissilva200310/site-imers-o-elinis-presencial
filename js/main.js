@@ -1,7 +1,7 @@
 /* Links comerciais. Tokens e chaves sensiveis ficam nas variaveis da Vercel. */
 const WA_NUMBER = "5598999999999";
 const WA_MSG = encodeURIComponent("Ola! Quero garantir minha vaga na Imersao Bum Sculp 3D do dia 04 de julho.");
-const CONFIRMATION_WA_NUMBER = "559891529871";
+const CONFIRMATION_WA_NUMBER = "559891631745";
 const CONFIRMATION_WA_MSG = encodeURIComponent("Ola, fiz meu cadastro pelo site da Imersao Bum Sculp 3D e quero falar com a equipe.");
 const IG_URL = "https://instagram.com/";
 
