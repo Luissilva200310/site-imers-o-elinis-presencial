@@ -1,1 +1,7 @@
 archive/
+dist/
+api/settings.php
+
+curso presencial/
+.claude/settings.local.json
+.hostinger/

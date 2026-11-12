@@ -5,32 +5,19 @@ const path = require("node:path");
 
 const html = fs.readFileSync(path.join(__dirname, "..", "index.html"), "utf8");
 
-function escapeRegExp(value) {
-  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-}
+test("the qualification form and modal were removed", () => {
+  assert.doesNotMatch(html, /id="leadModal"/);
+  assert.doesNotMatch(html, /id="leadForm"/);
+  assert.doesNotMatch(html, /Preencher formul[aá]rio/i);
+});
 
-test("lead modal uses clickable options for qualification fields", () => {
-  const expectedOptions = [
-    "Biomédica ou Dentista",
-    "Enfermeira",
-    "Farmacêutica",
-    "Esteticista",
-    "Dominar a técnica do zero",
-    "Aumentar meu faturamento",
-    "Oferecer um serviço premium",
-    "Me posicionar como referência",
-    "Até R$ 3 mil por mês",
-    "De R$ 3 mil a R$ 8 mil por mês",
-    "De R$ 8 mil a R$ 15 mil por mês",
-    "Acima de R$ 15 mil por mês",
-  ];
+test("every enrollment CTA has a direct WhatsApp fallback", () => {
+  const ctas = html.match(/<a[^>]+class="[^"]*js-lead-trigger[^"]*"[^>]*>/g) || [];
+  assert.ok(ctas.length >= 4);
 
-  for (const option of expectedOptions) {
-    assert.match(html, new RegExp(`value="${escapeRegExp(option)}"`));
-  }
-
-  for (const field of ["formacao", "objetivo", "faturamentoMedio"]) {
-    assert.match(html, new RegExp(`name="${field}" type="radio"`));
-    assert.match(html, new RegExp(`name="${field}Outro"`));
+  for (const cta of ctas) {
+    assert.match(cta, /href="https:\/\/wa\.me\/5598991529871\?text=/);
+    assert.match(cta, /target="_blank"/);
+    assert.match(cta, /rel="noopener noreferrer"/);
   }
 });

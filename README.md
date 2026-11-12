@@ -2,49 +2,49 @@
 
 Site estatico da imersao presencial Bum Sculp 3D, da Fada Bumbum / Dra. Elinis Almeida.
 
-## Estrutura
+Todos os botoes de inscricao abrem diretamente o WhatsApp `55 98 9163-1745` com a mensagem:
+
+> Ola Dra Elinis, tenho interesse em participar do curso presencial em Sao Paulo
+
+## Estrutura publicada
 
 - `index.html` - pagina principal da imersao presencial.
-- `obrigado.html` - pagina de confirmacao depois do cadastro.
 - `css/styles.css` - estilos visuais da pagina.
-- `js/main.js` - links comerciais, Pixel, modal de cadastro, envio do lead, barra fixa e animacoes de entrada.
-- `api/lead.js` - Vercel Function que cria o lead no ClickUp e envia o evento para Meta CAPI.
-- `api/config.js` - Vercel Function que entrega configuracoes publicas do navegador, como Pixel ID.
-- `js/tweaks-panel.jsx` e `js/tweaks.jsx` - painel visual de ajustes herdado do handoff, mantido como referencia e nao carregado em producao.
-- `assets/` - imagens usadas pela pagina principal.
-- `archive/design-handoff/` - pacote original exportado pela ferramenta de design.
+- `js/main.js` - link do WhatsApp, Instagram, barra fixa e animacoes de entrada.
+- `assets/` - imagens usadas pela pagina.
+- `.htaccess` - HTTPS, cache e compressao.
 
 ## Como visualizar
 
-Para testar apenas o visual, abra `index.html` diretamente no navegador ou rode um servidor local na raiz do projeto:
+Abra `index.html` diretamente no navegador ou rode um servidor local na raiz do projeto:
 
 ```bash
 python -m http.server 4173
 ```
 
-Depois acesse:
+## Publicar na Hostinger
 
-```text
-http://localhost:4173
+### Automático (padrão)
+
+Todo push na `main` dispara `.github/workflows/deploy-branch.yml`, que roda os testes e
+grava somente os arquivos do site na branch `deploy`. A integração GitHub da Hostinger
+publica essa branch em `public_html/curso-presencial`
+(https://metodobumsculp.com/curso-presencial).
+
+### Manual (alternativa)
+
+1. Gere o pacote com PowerShell:
+
+```powershell
+.\scripts\build-hostinger.ps1
 ```
 
-Para testar formulario, ClickUp e Pixel/CAPI, use Vercel:
+2. No hPanel, abra **Sites > Gerenciar > Gerenciador de arquivos > public_html**.
+3. Envie `dist/site-elis-hostinger.zip` para `public_html` e extraia o ZIP ali.
+4. Confirme que `index.html`, `assets`, `css` e `js` ficaram diretamente dentro de `public_html`.
+5. Abra o dominio em uma janela anonima e teste um botao de inscricao.
 
-```bash
-vercel dev
-```
-
-## Variaveis de ambiente
-
-Configure no Vercel:
-
-- `CLICKUP_TOKEN` - token da API do ClickUp.
-- `CLICKUP_LIST_ID` - lista de leads. Valor criado: `901327452649` (`CRM - Fada do Bumbum`).
-- `META_PIXEL_ID` - ID do Pixel da Meta.
-- `META_CAPI_TOKEN` - token da Conversions API da Meta.
-- `META_API_VERSION` - versao da Graph API. Padrao: `v25.0`.
-
-O Pixel ID e servido ao navegador por `/api/config`. Os tokens do ClickUp e da Meta ficam somente nas Functions.
+O site publicado nao depende de PHP, banco de dados, ClickUp ou formulario.
 
 ## Testes
 
@@ -52,12 +52,4 @@ O Pixel ID e servido ao navegador por `/api/config`. Os tokens do ClickUp e da M
 npm test
 ```
 
-## Ajustes antes de publicar
-
-Atualize em `js/main.js`:
-
-- `WA_NUMBER` com o WhatsApp oficial.
-- `IG_URL` com o Instagram oficial.
-- `CONFIRMATION_WA_NUMBER` se o WhatsApp da pagina de confirmacao mudar.
-
-O restante do material original foi preservado em `archive/design-handoff/`.
+Antes de publicar, atualize `IG_URL` em `js/main.js` com o Instagram oficial.
